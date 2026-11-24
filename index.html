@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#10131d"><meta name="description" content="Create platform-ready social media graphics. Resize, crop, add text and export images privately in your browser.">
+<meta property="og:title" content="Social Image Toolkit"><meta property="og:description" content="Create and resize social media images in your browser."><meta property="og:type" content="website">
+<title>Social Image Toolkit</title><link rel="icon" href="assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+<header class="topbar"><a class="brand" href="./"><span class="brand-mark">S</span><span>Social Image <b>Toolkit</b></span></a><div class="top-actions"><span class="privacy"><i></i> Files stay on your device</span><button class="btn btn-quiet" id="themeBtn" type="button" aria-label="Toggle theme">☾</button></div></header>
+<main class="shell">
+<section class="intro"><div><p class="eyebrow">CREATOR WORKSPACE</p><h1>Make every image <span>platform-ready.</span></h1><p class="sub">Resize, position, and design social graphics without uploading your files to a server.</p></div><div class="intro-chip">BROWSER-BASED EDITOR</div></section>
+<div class="workspace">
+<aside class="panel controls">
+<div class="section-head"><div><p class="eyebrow">01 / START</p><h2>Image & format</h2></div><button class="text-btn" id="resetBtn" type="button">Reset</button></div>
+<label class="upload-zone" id="dropZone"><input id="imageInput" type="file" accept="image/*" multiple hidden><span class="upload-icon">＋</span><strong>Choose image files</strong><small>or drag and drop · JPG, PNG, WebP</small><span class="upload-note">Multiple images supported for batch resize</span></label>
+<div id="fileInfo" class="file-info muted">No image selected</div>
+<div class="rule"></div>
+<div class="section-head"><div><p class="eyebrow">02 / CANVAS</p><h2>Platform preset</h2></div></div>
+<label class="field-label" for="preset">Choose a format</label><select id="preset" class="control-input">
+<optgroup label="Instagram"><option value="1080x1080">Square post · 1080 × 1080</option><option value="1080x1350">Portrait post · 1080 × 1350</option><option value="1080x1920">Story / Reel · 1080 × 1920</option><option value="1080x566">Landscape post · 1080 × 566</option></optgroup>
+<optgroup label="Facebook"><option value="1200x630">Feed post · 1200 × 630</option><option value="1640x624">Cover · 1640 × 624</option></optgroup>
+<optgroup label="LinkedIn"><option value="1200x627">Post · 1200 × 627</option><option value="1584x396">Personal banner · 1584 × 396</option><option value="1128x191">Company banner · 1128 × 191</option></optgroup>
+<optgroup label="YouTube"><option value="1280x720">Thumbnail · 1280 × 720</option><option value="2560x1440">Channel art · 2560 × 1440</option></optgroup>
+<option value="custom">Custom dimensions</option></select>
+<div class="two-fields"><label>Width (px)<input id="widthInput" class="control-input" type="number" min="1" max="10000" value="1080"></label><label>Height (px)<input id="heightInput" class="control-input" type="number" min="1" max="10000" value="1080"></label></div>
+<div class="field-row"><label class="check"><input id="lockRatio" type="checkbox" checked> Keep image ratio</label><span class="muted" id="ratioLabel">1:1</span></div>
+<div class="rule"></div>
+<div class="section-head"><div><p class="eyebrow">03 / IMAGE</p><h2>Crop & position</h2></div></div>
+<label class="field-label" for="fitMode">Image fit</label><select id="fitMode" class="control-input"><option value="cover">Cover · fill canvas</option><option value="contain">Contain · show full image</option></select>
+<label class="field-label" for="zoom">Zoom <output id="zoomValue">100%</output></label><input id="zoom" type="range" min="50" max="250" value="100">
+<label class="field-label" for="posX">Horizontal position <output id="posXValue">50%</output></label><input id="posX" type="range" min="0" max="100" value="50">
+<label class="field-label" for="posY">Vertical position <output id="posYValue">50%</output></label><input id="posY" type="range" min="0" max="100" value="50">
+<div class="field-row"><label class="check"><input id="backgroundToggle" type="checkbox"> Use background color</label><input id="backgroundColor" type="color" value="#ffffff" aria-label="Background color"></div>
+<div class="rule"></div>
+<div class="section-head"><div><p class="eyebrow">04 / DESIGN</p><h2>Text overlay</h2></div><label class="check"><input id="textEnabled" type="checkbox"> Enable</label></div>
+<label class="field-label" for="overlayText">Your text</label><textarea id="overlayText" class="control-input" rows="2" placeholder="Add a headline or message..."></textarea>
+<div class="two-fields"><label>Font size (px)<input id="fontSize" class="control-input" type="number" min="8" max="300" value="72"></label><label>Text color<input id="textColor" class="control-input color-input" type="color" value="#ffffff"></label></div>
+<div class="two-fields"><label>Text alignment<select id="textAlign" class="control-input"><option value="center">Center</option><option value="left">Left</option><option value="right">Right</option></select></label><label>Font weight<select id="fontWeight" class="control-input"><option value="700">Bold</option><option value="400">Regular</option><option value="800">Extra bold</option></select></label></div>
+<label class="field-label" for="textY">Text vertical position <output id="textYValue">75%</output></label><input id="textY" type="range" min="5" max="95" value="75">
+<label class="check"><input id="textShadow" type="checkbox" checked> Add text shadow</label>
+<div class="rule"></div>
+<div class="section-head"><div><p class="eyebrow">05 / EXPORT</p><h2>Download image</h2></div></div>
+<div class="two-fields"><label>Format<select id="exportFormat" class="control-input"><option value="image/png">PNG</option><option value="image/jpeg">JPEG</option><option value="image/webp">WebP</option></select></label><label>Quality<input id="quality" class="control-input" type="number" min="10" max="100" value="92"></label></div>
+<button class="btn btn-primary full" id="downloadBtn" type="button" disabled>↓ Export image</button>
+<p class="hint">Exports use the exact canvas dimensions. JPEG uses the selected background color or white.</p>
+</aside>
+<section class="panel preview-panel">
+<div class="preview-header"><div><p class="eyebrow">LIVE PREVIEW</p><h2 id="previewTitle">Instagram square post</h2><p id="dimensionLabel" class="muted">1080 × 1080 px</p></div><div class="preview-actions"><button class="btn btn-secondary" id="fitPreviewBtn" type="button">Fit preview</button><button class="btn btn-quiet" id="fullscreenBtn" type="button" aria-label="Toggle preview size">⛶</button></div></div>
+<div class="canvas-stage" id="canvasStage"><div class="canvas-wrap"><canvas id="previewCanvas" width="1080" height="1080"></canvas><div id="emptyState" class="empty-state"><span>▧</span><strong>Your design appears here</strong><small>Choose an image to begin creating</small></div></div></div>
+<div class="preview-footer"><span id="previewStatus">Waiting for an image</span><span>Preview is scaled to fit · Export is full resolution</span></div>
+</section>
+</div>
+<section class="panel batch-panel"><div class="section-head"><div><p class="eyebrow">BATCH WORKSPACE</p><h2>Resize multiple images</h2><p class="muted">Apply the selected dimensions to every image and download them together.</p></div><button class="btn btn-secondary" id="batchBtn" type="button" disabled>↓ Download batch ZIP</button></div><div id="batchList" class="batch-list"><p class="muted">Select multiple files above to prepare a batch.</p></div></section>
+<footer><span>Social Image Toolkit</span><span>Private by design · Images are processed locally in your browser</span></footer>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script><script src="assets/js/app.js"></script>
+</body></html>
